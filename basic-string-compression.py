@@ -4,6 +4,8 @@
 # the original string. You can assume the string has only uppercase and lowercase letters (a - z).
 #
 # From Laakman-McDowell, Cracking the Code Interview, 6th ed, p. 91
+import sys
+
 def simpleStringCompress(strIn):
     current_ch = ''
     current_ch_cnt = 0
@@ -17,12 +19,19 @@ def simpleStringCompress(strIn):
         else:
             current_ch_cnt += 1
     strOut += current_ch + str(current_ch_cnt)
-    return strOut
-
+   
+   # If compressed string is not shorter than original string,
+   # then just return the original.
+    print ("Input str on len={} compressed to {}".format(len(strIn), len(strOut)))
+    return strOut if len(strOut) < len(strIn) else strIn
 
 def main():
-    ret = simpleStringCompress('aaabccccaddee')
-    print('Stringus compressus')
+    if len(sys.argv) == 1:
+        print("Please supply string to compress. Example: aaabccccaddee")
+        return
+
+    ret = simpleStringCompress(sys.argv[1])
+    print('Stringis compressis')
     print(ret)
 
 if __name__ == '__main__':
