@@ -18,7 +18,7 @@ class LinkedList:
         newNode.next = self.head
         self.head = newNode 
 
-    def traverseListDict(self):
+    def isUniqueDict(self):
         foundDict = {}
         nextNode = self.head
         while nextNode != None:
@@ -28,6 +28,31 @@ class LinkedList:
             else:
                 foundDict[nextNode.data] = 1                                
             nextNode = nextNode.next
+        return True  
+
+    def traverseListPartial(self, startNode):
+        if startNode.next == None:
+            return True
+        seekValue = startNode.data
+        nextNode = startNode.next
+        while nextNode != None:
+            if nextNode.data == seekValue:
+                print("Found dups {} and {}".format(seekValue, nextNode.data))
+                return False
+            else:
+                nextNode = nextNode.next  
+        return True                       
+
+    def isUniqueNoDataStructs(self):
+        nextNode = self.head
+        #foundDup = False
+        while nextNode != None: # and foundDup == False:
+            # Now loop through the rest of the list looking for a match  
+            #print("Calling traverseListPartial")          
+            if self.traverseListPartial(nextNode) == False:
+                return False
+            nextNode = nextNode.next
+
         return True            
 
 
@@ -37,11 +62,16 @@ def main():
     lnk.addToFront("vfc")
     lnk.addToFront("rca")
     lnk.addToFront("xyz")
-    lnk.addToFront("rca")   
+    lnk.addToFront("rcc")   
 
     print("Listus uniqueus determinus")
-    result = lnk.traverseListDict()     
+    result = lnk.isUniqueDict()     
     print("All unique members") if result else print("Non-unique members found")
+
+    print("Listus uniqueus determinus non structurus")
+    result = lnk.isUniqueNoDataStructs()
+    print("All unique members") if result else print("Non-unique members found")
+
 
 if __name__ == '__main__':
     main()
